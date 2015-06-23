@@ -118,7 +118,6 @@ void value_list_free(Value_list_t *value_list) {
 
 
 /*   Main for testing functions : 
-*/
 int main(){
 
 	Sensor_list_t sensor_list;
@@ -143,11 +142,17 @@ int main(){
 	value_list_append(&value_list, new_value);
 	sensor_list_append(&sensor_list, nume_senzor, value_list);	
 	int i,j ; 
-	for (i= 0 ; i < sensor_list.size; i++)
-		for (j = 0; j < sensor_list.data[i].number_of_values; j++){
-			printf("For sensor number %d, the %d value is : %lf\n", i, j, sensor_list.data[i].data[j].value);
+	for (i= 0 ; i < sensor_list.size; i++){
+		Value_list_t get_value;
+		value_list_init(&get_value);
+		get_value = sensor_list_get(&sensor_list, i);
+		for (j = 0; j < get_value.number_of_values; j++){
+			Value get;
+			get = value_list_get(&get_value, j);
+			printf("For sensor number %d, the %d value is : %lf\n", i, j, get.value);
 		}
+	}
  
 	return 0;
 }
-/* */
+*/

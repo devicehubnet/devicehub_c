@@ -138,12 +138,12 @@ int devicehub_autoconfigure(){
 
 int devicehub_send(){
 
-	//TODO
 	int i,j;
 	char* topic;
 	char* payload;
 	MQTTClient_message pubmsg = MQTTClient_message_initializer;
 	MQTTClient_deliveryToken token;
+	//printf("[Debug] Number of values : %i \n", sensor_list.data[i].number_of_values);
 	for (i = 0 ; i < sensor_list.size; i++)
 		for (j = 0 ; j < sensor_list.data[i].number_of_values; j++){
 			
@@ -168,8 +168,6 @@ int devicehub_send(){
 
 int devicehub_add_sensor(char* name, enum sensorTypes sensorType){
 
-	//TODO
-
 	Value_list_t values;
 	value_list_init(&values);
 	sensor_list_append(&sensor_list, name, values);
@@ -179,6 +177,7 @@ int devicehub_add_sensor(char* name, enum sensorTypes sensorType){
 
 
 int devicehub_add_actuator(char* name, void* (*function_ptr_actuator_callback)(int)){
+	
 	//TODO
 	Actuator new_actuator;		
 	actuator_list_append(&actuator_list, name, new_actuator);
@@ -191,13 +190,11 @@ int devicehub_add_actuator(char* name, void* (*function_ptr_actuator_callback)(i
 
 int devicehub_add_value(char* name, double value){
 
-	//TODO
 	int i;
 	Value new_value;
-	new_value.value = value;
-	new_value.time = 0;  
+	new_value.value = value;  
 	for ( i = 0 ; i < sensor_list.size; i++ )
-		if (strncmp(sensor_list.data[i].name, name, NAME_SIZE))
+		if (!strncmp(sensor_list.data[i].name, name, NAME_SIZE))
 			value_list_append(&sensor_list.data[i], new_value);
 
 }
@@ -206,19 +203,14 @@ int devicehub_add_value(char* name, double value){
 
 int devicehub_list_values(char* sensor_name){
 
-	//TODO
 	int i, j;
 	Value new_value;
 	for ( i = 0; i < sensor_list.size; i++){
-		if (strncmp(sensor_list.data[i].name, sensor_name, NAME_SIZE) ){
+		if ( !strncmp(sensor_list.data[i].name, sensor_name, NAME_SIZE) )
 			for( j = 0; j < sensor_list.data[i].number_of_values; j++){
 				new_value = value_list_get(sensor_list.data, j);			 
-				printf("[Debug] I'M HERE !\n");
 				printf("Value for %i index is %lf\n", j, new_value.value);
 			}
-
-		}	
-
 	}
 
 }
@@ -226,7 +218,6 @@ int devicehub_list_values(char* sensor_name){
 
 int devicehub_disconnect(){
 
-	//TODO	
 	MQTTClient_disconnect(client, 10000);
 	MQTTClient_destroy(&client);
 	
@@ -245,7 +236,6 @@ int main(){
 
 	devicehub_connect(host, port, keepalive);
 	
-	printf("sdada\n");	
 	char* name = (char*)malloc( sizeof(char)*NAME_SIZE );
 	
 	strncpy(name, "new_sensor", NAME_SIZE);
@@ -254,9 +244,11 @@ int main(){
 	devicehub_add_sensor(name, type);
 	int n = 0 ;
 	devicehub_add_value(name, n);
+	devicehub_add_value(name, n+1);
+	devicehub_add_value(name, n+2);
 	devicehub_list_values(name);
 	devicehub_send();
-	//devicehub_disconnect();
+	devicehub_disconnect();
 		
 	return 0;	
 

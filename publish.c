@@ -64,6 +64,7 @@ int main(int argc, char* argv[])
         printf("Failed to connect, return code %d\n", rc);
         exit(-1);       
     }
+    /*
     pubmsg.payload = PAYLOAD;
     pubmsg.payloadlen = strlen(PAYLOAD);
     pubmsg.qos = QOS;
@@ -76,5 +77,6 @@ int main(int argc, char* argv[])
     while(deliveredtoken != token);
     MQTTClient_disconnect(client, 10000);
     MQTTClient_destroy(&client);
+    */
     return rc;
 }
