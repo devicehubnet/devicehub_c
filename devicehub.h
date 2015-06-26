@@ -23,8 +23,10 @@ char* api_key;
 int project_id; 
 char* device_id;
 
+
 Actuator_list_t actuator_list;
 Sensor_list_t sensor_list;
+
 
 typedef void (*function_actuator_callback)(int);
 
@@ -35,7 +37,7 @@ int devicehub_connect(char* hostname, unsigned int port, unsigned int keepalive)
 int devicehub_autoconfigure();
 int devicehub_send();
 int devicehub_add_sensor(char* name, enum sensorTypes sensorType);
-int devicehub_add_actuator(char* name, function_actuator_callback actuator_callback);
+int devicehub_add_actuator(char* name );
 int devicehub_add_value(char* name, double value);
 int devicehub_list_values(char* sensor_name);
 int devicehub_disconnect();
