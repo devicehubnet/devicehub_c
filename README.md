@@ -18,8 +18,10 @@
 		
    To build:
 			
-			sudo cmake -G "Unix Makefiles"
-			sudo make
+			mkdir build
+			cd build
+			cmake ..
+			make
 		
    To install:
 			
