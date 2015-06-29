@@ -1,4 +1,6 @@
-#include "/home/cristi/devicehub_dir/devicehub/src/devicehub.c"
+/*   Tests for use of devicehub.h */
+
+#include "devicehub.h"
 
 
 int main(){

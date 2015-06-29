@@ -1,4 +1,6 @@
-#include "/home/cristi/devicehub_dir/devicehub/src/sensorList.c"
+/*  Tests for use of sensorList.h */
+
+#include "sensorList.h"
 
 
 int main(){

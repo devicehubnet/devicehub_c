@@ -1,4 +1,6 @@
-#include "/home/cristi/devicehub_dir/devicehub/src/actuatorList.c"
+/* Tests for use of actuatorList.h */
+
+#include "actuatorList.h"
 
 
 int main() {

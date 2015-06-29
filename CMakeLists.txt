@@ -3,8 +3,6 @@ cmake_minimum_required(VERSION 2.8)
  
 set(VERSION "0.5.9")
  
-#add_executable(${PROJECT_NAME} test.c devicehub.c sensorList.c actuatorList.c)
-
 aux_source_directory(src SRC_LIB_LIST)
 aux_source_directory(examples SRC_LIST)
 
