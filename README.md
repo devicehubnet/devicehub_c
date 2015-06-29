@@ -35,10 +35,10 @@
 
    To test :
 
-		./devicehub // after make , in the wrapper library folder
+		./devicehub # after make , in the build directory
    or
 
-		devicehub // after install
+		devicehub  # after install
 
 
 
