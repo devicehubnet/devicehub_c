@@ -1,7 +1,7 @@
 project(devicehub)
 cmake_minimum_required(VERSION 2.8)
 
-set(VERSION "0.5.9")
+set(VERSION "0.6")
 aux_source_directory(src SRC_LIB_LIST)
 aux_source_directory(examples SRC_LIST)
 
@@ -11,9 +11,9 @@ include_directories("${CMAKE_SOURCE_DIR}")
 include_directories("${CMAKE_SOURCE_DIR}/src")
 
 
-add_executable(${PROJECT_NAME} ${SRC_LIST} ${SRC_LIB_LIST})
+add_executable(${PROJECT_NAME}_test ${SRC_LIST} ${SRC_LIB_LIST})
 
-add_library(src SHARED ${SRC_LIB_LIST})
+add_library(${PROJECT_NAME} SHARED ${SRC_LIB_LIST})
 
  
 SET(CMAKE_BUILD_TYPE Debug)
@@ -30,6 +30,7 @@ find_library(PAHO_LIBRARY NAMES paho-mqtt3c)
  
 # Handle the QUIETLY and REQUIRED arguments and set PAHO_FOUND to TRUE if
 # all listed variables are TRUE.
+
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(PAHO DEFAULT_MSG PAHO_LIBRARY PAHO_INCLUDE_DIR)
 if(PAHO_FOUND)
@@ -42,6 +43,12 @@ if(PAHO_FOUND)
   target_link_libraries (${PROJECT_NAME} ${PAHO_LIBRARIES})
 endif (PAHO_FOUND)
 
+if(PAHO_FOUND)
+  target_link_libraries (${PROJECT_NAME}_test ${PAHO_LIBRARIES})
+endif (PAHO_FOUND)
+
+INSTALL(TARGETS ${PROJECT_NAME} DESTINATION lib)
+INSTALL(TARGETS ${PROJECT_NAME}_test DESTINATION bin)
 
 SET(CPACK_GENERATOR "DEB")
 set(CPACK_PACKAGE_VERSION ${VERSION})
