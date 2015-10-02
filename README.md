@@ -30,16 +30,31 @@
 
 
 
+###  RaspberryPi setup ####
+
+			mkdir devel
+			sudo apt-get install libssl-dev
+			git clone http://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.c.git
+			cd org.eclipse.paho.mqtt.c.git
+			make
+			sudo make install
+			sudo apt-get install cmake
+			git clone https://github.com/devicehubnet/devicehub_c.git
+			cd devicehub_c.git
+			mkdir build
+			cd build
+			cmake..
+			make
+			sudo make install
+
+
+
 
 ###  Test description ####
 
    To test :
 
-		./devicehub # after make , in the build directory
-   or
-
-		devicehub  # after install
-
+		./devicehub_test # after make , in the build directory
 
 
    The test consists of some values published into a "humidity" sensor and "temperature" sensor, also a subscribe on an actuator "light".
